@@ -1,5 +1,5 @@
 # Mostly modified from https://github.com/yaroslavvb/stuff/blob/master/matmul_benchmark.py
-# 16K x 16K matric mul
+# 16K x 16K matmul
 # http://stackoverflow.com/questions/41804380/testing-gpu-with-tensorflow-matrix-multiplication
 
 import os
