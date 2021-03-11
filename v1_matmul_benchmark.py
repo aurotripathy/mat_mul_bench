@@ -59,11 +59,12 @@ ops = n**3 + (n-1)*n**2 # n^2*(n-1) additions, n^3 multiplications
 elapsed = (end - start)
 rate = iters*ops/elapsed/10**12
 
-print('TF32:', args.tf32)
-print('Precision:', args.precision)
-print('\n %d x %d matmul took: %.5f sec, %.2f T flops' % (n, n,
-                                                            elapsed/iters, 
-                                                            rate,))
+# print('TF32:', args.tf32)
+# print('Precision:', args.precision)
+# print('\n %d x %d matmul took: %.5f sec, %.2f T flops' % (n, n,
+#                                                             elapsed/iters, 
+#                                                             rate,))
+print(f'TF32:{args.tf32} Precision:{args.precision} Dim:{n} x {n} matmul took: {elapsed/iters:.5f} sec, {rate:.2f} T flops')
 
 
 
