@@ -21,13 +21,15 @@ parser.add_argument('--precision', '-p', help="pick data type",
 
 args = parser.parse_args()
 
-if args.tf32:
-    tf.config.experimental.enable_tensor_float_32_execution(True)
-    print('enabling tf32')
-else:
-    tf.config.experimental.enable_tensor_float_32_execution(False)
-    print('disabling tf32')
-    
+try:
+    if args.tf32:
+        tf.config.experimental.enable_tensor_float_32_execution(True)
+        print('enabling tf32')
+    else:
+        tf.config.experimental.enable_tensor_float_32_execution(False)
+        print('disabling tf32')
+except AttributeError as error:
+    print('Non Fatal ERROR:', error)
 
 n = 8192 * 2
 if args.precision == 'fp32':
