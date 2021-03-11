@@ -1,6 +1,5 @@
 # Mostly modified from https://github.com/yaroslavvb/stuff/blob/master/matmul_benchmark.py
-# On Titan X (Pascal)
-# 16K x 16K
+# 16K x 16K matric mul
 # http://stackoverflow.com/questions/41804380/testing-gpu-with-tensorflow-matrix-multiplication
 
 import os
@@ -12,10 +11,8 @@ import tensorflow.compat.v1 as tf  # original code based on TF V1
 tf.disable_v2_behavior()
 
 parser = argparse.ArgumentParser()
-   
 parser.add_argument('--tf32', help="tf32 execution",
                     action='store_true')
-
 parser.add_argument('--precision', '-p', help="pick data type",
                     type=str, required=True, choices=['fp32', 'fp16'])
 
@@ -50,7 +47,7 @@ sess = tf.compat.v1.Session(config=config)
 sess.run(tf.compat.v1.global_variables_initializer())
 iters = 10
 
-# pre-warming
+# warming up
 sess.run(product.op)
 
 start = time.time()
@@ -61,11 +58,6 @@ ops = n**3 + (n-1)*n**2 # n^2*(n-1) additions, n^3 multiplications
 elapsed = (end - start)
 rate = iters*ops/elapsed/10**12
 
-# print('TF32:', args.tf32)
-# print('Precision:', args.precision)
-# print('\n %d x %d matmul took: %.5f sec, %.2f T flops' % (n, n,
-#                                                             elapsed/iters, 
-#                                                             rate,))
 print(f'TF32:{args.tf32} Precision:{args.precision} Dim:{n} x {n} matmul took: {elapsed/iters:.5f} sec, {rate:.2f} T flops')
 
 
